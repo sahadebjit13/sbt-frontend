@@ -1,0 +1,25 @@
+
+<body @fade>
+    <h3>Overview</h3>
+    <div class="overviewComponentContainer">
+        <overview-card [heading]="'Monthly Income'" [data]="20000"/>
+        <overview-card [heading]="'Expenditure'" [data]="10000"/>
+        <overview-card [heading]="'Savings'" [data]="combinedData.total_remaining_budget"/>
+    </div>
+    <hr>
+    <div class="headingWithButton">
+        <h3>Budgets</h3>
+        <span class="material-symbols-outlined" (click)="addItemDialog()">add_circle</span>
+    </div>
+    <div class="budgetComponentContainer">
+        <budget-card 
+        *ngFor="let budget of combinedData.items"
+        [heading]="budget.category" 
+        [amountSpent]="budget.used_budget"
+        [amountAllocated]="budget.amount" 
+        [startDate]="budget.startDate"
+        [endDate]="budget.endDate"
+        [percentageSpent]="budget.percentage_spent"
+        />
+    </div>
+</body>

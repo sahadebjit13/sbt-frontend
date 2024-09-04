@@ -1,0 +1,87 @@
+.overviewCard{
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px 0 rgba( 31, 38, 135, 0.12 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: auto;
+}
+.overviewCard > span {
+    font-size: 2rem;
+}
+
+
+.budgetCard{
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px 0 rgba( 31, 38, 135, 0.12 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.budgetCard > span{
+    height: 5px;
+    width: 100%;
+}
+.headingWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.iconWrapper{
+    display: flex;
+    gap: 10px;
+}
+.iconWrapper>span{
+    padding: 5px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+}
+.iconWrapper>span:hover{
+    cursor: pointer;
+    box-shadow: 0 4px 16px 0 rgba( 31, 38, 135, 0.12 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.subHeading{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.subHeading > span {
+    cursor: pointer;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+.progressWrapper{
+    height: 20px;
+    width: 100%;
+    border-radius: 50px;
+    background-color: var(--faded-green);
+    padding: 4px;
+    
+}
+.progressBar{
+    transition: 1s;
+    height: 12px;
+    border-radius: 50px;
+    background-color: var(--dark-green);
+    
+}
+/* Donut Chart */
+.chart {
+    font-family: "Montserrat", sans-serif;
+    width: 49%;
+    height: 400px;
+    min-width: 600px;
+    background: transparent;
+}
+
+@media screen and (max-width: 1400px) {
+    .headingWrapper{
+        display: flex;
+        flex-direction: column;
+    }
+}

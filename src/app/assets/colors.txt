@@ -1,0 +1,4 @@
+#003333 -> Dark Green
+#027c68 -> Faded Green
+#b0e892 -> Light Green
+#009933 -> Leaf Green

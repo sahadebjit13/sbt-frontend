@@ -1,0 +1,34 @@
+section{
+    background: url('../assets/download1.jpeg') no-repeat;
+    /* overflow-y: scroll; This is to switched on when making it a responsive website */
+    background-size: cover;
+    color: var(--dark-green);
+}
+
+
+.formContainer{
+    background: rgba( 255, 255, 255, 0.4 );
+    border-radius: 25px;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    backdrop-filter: blur( 2.5px );
+    -webkit-backdrop-filter: blur( 2.5px );
+}
+h3{
+    color: var(--leaf-green);
+}
+#typeEmailX, #typePasswordX{
+    border-radius: 25px;
+}
+.warning{
+    font-style: italic;
+}
+.login{
+    border-radius: 25px;
+    box-shadow: 0 8px 32px 0 rgba( 122, 122, 99, 0.37 );
+    background-color: var(--dark-green);
+    color: var(--light-green);
+}
+#registration{
+    color: var(--dark-green);
+}

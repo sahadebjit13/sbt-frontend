@@ -1,0 +1,61 @@
+.hidden{
+    visibility: hidden;
+}
+.emailVisible .nameVisible .passwordVisible .phoneVisible{
+    visibility: visible;
+}
+
+section{
+    background: url('../assets/download1.jpeg') no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #003333;
+}
+.container{
+    filter: brightness(100%);
+}
+.formContainer{
+    background: rgba( 255, 255, 255, 0.4 );
+    border-radius: 25px;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 2.5px );
+    -webkit-backdrop-filter: blur( 2.5px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+h3{
+    color: #009933;
+}
+.nameWrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+#typeEmailX, #typeNameX, #typeNameY, #typePhoneX, #typePasswordX{
+    border-radius: 25px;
+}
+.warning{
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.warning > span{
+    font-style: italic;
+}
+.login{
+    border-radius: 25px;
+    box-shadow: 0 8px 32px 0 rgba( 122, 122, 99, 0.37 );
+    background-color: #003333;
+    color: #b0e892;
+}
+.loginDisabled{
+    cursor: not-allowed;
+    pointer-events: none !important;
+}
+.loginEnabled{
+    cursor: pointer;
+}
+#login{
+    color: #003333;
+}

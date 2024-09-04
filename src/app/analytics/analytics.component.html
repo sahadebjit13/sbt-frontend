@@ -1,0 +1,61 @@
+
+<body @fade>
+    <h3>Overview</h3>
+    <div class="overviewComponentContainer">
+        <ag-charts
+        [options]="historyOptions"
+    ></ag-charts>
+    </div>
+    <div class="headingWithButton">
+        <h3>Monthly Details</h3>
+    </div>
+    <div class="historyComponentContainer">
+        <div class="tableContainer">
+            <table mat-table [dataSource]="monthlyExpenseList">
+          
+              <!-- Position Column -->
+              <ng-container matColumnDef="no">
+                <th mat-header-cell *matHeaderCellDef> Serial no. </th>
+                <td mat-cell *matCellDef="let history"> {{history.id}} </td>
+              </ng-container>
+          
+              <!-- Name Column -->
+              <ng-container matColumnDef="month">
+                <th mat-header-cell *matHeaderCellDef> Month </th>
+                <td mat-cell *matCellDef="let history"> {{history.month}} </td>
+              </ng-container>
+          
+              <!-- Weight Column -->
+              <ng-container matColumnDef="income">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let history"> {{history.income}} </td>
+              </ng-container>
+          
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="expense">
+                <th mat-header-cell *matHeaderCellDef> Expense </th>
+                <td mat-cell *matCellDef="let history"> {{history.expense}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="saving">
+                <th mat-header-cell *matHeaderCellDef> Saving </th>
+                <td mat-cell *matCellDef="let history"> {{history.saving}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="rating">
+                <th mat-header-cell *matHeaderCellDef> Rating </th>
+                <td mat-cell *matCellDef="let history"> {{history.rating}} </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          
+            <!-- <mat-paginator [pageSizeOptions]="[5, 10]"
+                           showFirstLastButtons
+                           aria-label="Select page of expenses">
+            </mat-paginator> -->
+          </div>
+          
+    </div>
+</body>

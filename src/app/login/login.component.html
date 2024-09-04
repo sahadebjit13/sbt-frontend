@@ -1,0 +1,43 @@
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="formContainer shadow-2-strong">
+          <div class="card-body p-5 text-center">
+  
+            <h3 class="mb-5">{{title}}</h3>
+  
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+              
+              <div class="form-outline mt-5 mb-3">
+                <input type="email" id="typeEmailX" class="form-control form-control-lg" placeholder="Email"
+                formControlName="email" [(ngModel)]="loginData.email" (change)="checkLoginFieldsToDisable()" />
+                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                  <span class="warning d-flex justify-content-start">*Please enter a valid email address.</span>
+                </div>
+              </div>
+  
+              <div class="form-outline mt-5 mb-3">
+                <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Password" 
+                formControlName="password" [(ngModel)]="loginData.password" (change)="checkLoginFieldsToDisable()" />
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched; else empty">
+                  <span class="warning d-flex justify-content-start">*Password is required.</span>
+                </div>
+              </div>
+              
+              <ng-template #empty>
+                <span></span>
+              </ng-template>
+  
+              <button class="login btn btn-lg btn-block mt-5 mb-4" type="submit" [disabled]="disableToggle">Login</button>
+  
+              <div>Don't have an account? <a [routerLink]="['/registration']" id="registration">Create one</a></div>
+            </form>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>

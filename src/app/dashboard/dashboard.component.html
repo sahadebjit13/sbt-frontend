@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<body>
+    
+    <!-- <div class="container"> -->
+        <header>
+            <div id="logoBox">
+                <img src="coin.png" alt="coin" id="coin" height="50">
+                <span>SBT</span>
+            </div>
+            <div>
+                <button id="logout" (click)="logoutDialog()">Logout</button>
+                <span class="material-symbols-outlined">
+                    account_circle
+                    </span>
+            </div>
+        </header>
+        <main>
+            <div class="navigations">
+                <div class="navigationContainer">
+                    <button class="navigationButton" (click)="changeDashboardContent(1)">Budgets</button>
+                    <button class="navigationButton" (click)="changeDashboardContent(2)">Expenses</button>
+                    <button class="navigationButton" (click)="changeDashboardContent(3)">Analytics</button>
+                </div>
+            </div>
+            <div class="pages">
+                <div class="pageContainer" [ngSwitch]="contentId">
+                    <ng-container *ngSwitchCase="1">
+                        <app-budget />
+                    </ng-container>
+                    <ng-container *ngSwitchCase="2">
+                        <app-expense />
+                    </ng-container>
+                    <ng-container *ngSwitchCase="3">
+                        <app-analytics />
+                    </ng-container>
+                    <ng-container *ngSwitchDefault="">
+                        <app-budget></app-budget>
+                    </ng-container>
+                </div>
+            </div>
+        </main>
+    <!-- </div> -->
+</body>

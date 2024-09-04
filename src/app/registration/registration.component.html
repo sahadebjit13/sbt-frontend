@@ -1,0 +1,74 @@
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-6 col-xl-5">
+        <div class="formContainer shadow-2-strong">
+          <div class="card-body p-5 text-center">
+    
+            <h3 class="mb-5">{{title}}</h3>
+    
+            <form class="formFields" [formGroup]="registrationForm" (ngSubmit)="register()">
+              <div class="nameWrapper">
+    
+                <div class="form-outline mb-3">
+                  <input type="text" id="typeNameX" class="form-control form-control-lg mb-1" placeholder="First name" 
+                  formControlName="firstName" [(ngModel)]="user.firstName" />
+                </div>
+                
+                
+                <div class="form-outline mb-3">
+                  <input type="text" id="typeNameY" class="form-control form-control-lg mb-1" placeholder="Last name" 
+                  formControlName="lastName" [(ngModel)]="user.lastName" />
+                </div>
+    
+              </div>
+              <div class="warning" *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched &&
+                          registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched">
+                <span>*Full name is required.</span>
+              </div>
+              
+              
+    
+              <div class="form-outline mb-3">
+                <input type="text" id="typePhoneX" class="form-control form-control-lg mb-1" placeholder="Phone number" 
+                formControlName="phoneNo" [(ngModel)]="user.phoneNo" />
+              </div>
+              <div class="warning" *ngIf="registrationForm.get('phoneNo')?.invalid && registrationForm.get('phoneNo')?.touched">
+                <span>*Phone number is required.</span>
+              </div>
+              
+              
+              <div class="form-outline mb-3">
+                <input type="email" id="typeEmailX" class="form-control form-control-lg mb-1" placeholder="Email" 
+                formControlName="email" [(ngModel)]="user.email" />
+              </div>
+              <div class="warning" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+                <span>*Email is required.</span>
+              </div>
+    
+              <div class="mb-3">
+                <input type="password" id="typePasswordX" class="form-control form-control-lg mb-1" placeholder="Password" 
+                formControlName="password" minlength="8" [(ngModel)]="user.password" />
+              </div>
+              <div class="warning" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+                <span>*Password should be atleast 8 characters.</span>
+              </div>
+              
+              <ng-template #empty>
+                <span>&nbsp;</span>
+              </ng-template>
+    
+              <button class="login btn btn-lg btn-block px-4 mb-4" type="submit">Register</button>
+    
+              <div class="form-check d-flex justify-content-center gap-3">
+                <span>Already have an account? <a [routerLink]="['/login']" id="login">Sign in</a></span>
+              </div>
+    
+            </form>
+    
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>

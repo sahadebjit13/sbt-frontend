@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Budget } from '../entity/budget';
+import { UpdatedBudget } from '../budget/budget.component';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class BudgetService {
 
   createBudget(budget: Budget): Observable<Object>{
     const headers = this.getHeaders()
-    return this.http.post<Object>(this.url+`/create`, budget, { headers })
+    return this.http.post<Budget>(this.url+'/create', budget, { headers })
   }
 
   getAllBudgets(): Observable<Budget[]>{
@@ -57,12 +58,12 @@ export class BudgetService {
     return this.http.get<Array<Budget>>(this.url+`/category/${category}`, { headers })
   }
 
-  updateBudget(id: number, budget: Budget): Observable<Object>{
+  updateBudgetbyCategoryAndEmail(params: UpdatedBudget): Observable<Object>{
     const headers = this.getHeaders()
-    return this.http.put(this.url+`/${id}`, budget, { headers })
+    return this.http.put(this.url+`/update?email=${params.email}&category=${encodeURI(params.category)}&Amount=${params.newAmount}`, {}, { headers })
   }
 
-  deleteBudget(id: number, budget: Budget): Observable<Object>{
+  deleteBudget(id: number): Observable<Object>{
     const headers = this.getHeaders()
     return this.http.delete(this.url+`/${id}`, { headers })
   }

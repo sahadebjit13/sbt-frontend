@@ -25,19 +25,9 @@
     flex-direction: row;
     justify-content: space-between;
 }
-.iconWrapper{
-    display: flex;
-    gap: 10px;
-}
-.iconWrapper>span{
-    padding: 5px;
-    border: 1px solid transparent;
-    border-radius: 20px;
-}
-.iconWrapper>span:hover{
-    cursor: pointer;
-    box-shadow: 0 4px 16px 0 rgba( 31, 38, 135, 0.12 );
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+.material-symbols-outlined{
+    color: var(--dark-red);
+    font-size: 40px;
 }
 .subHeading{
     display: flex;
@@ -59,7 +49,7 @@
     height: 20px;
     width: 100%;
     border-radius: 50px;
-    background-color: var(--faded-green);
+    background-color: black;
     padding: 4px;
     
 }
@@ -67,7 +57,7 @@
     transition: 1s;
     height: 12px;
     border-radius: 50px;
-    background-color: var(--dark-green);
+    background-color: var(--faded-green);
     
 }
 /* Donut Chart */

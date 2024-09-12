@@ -20,6 +20,7 @@
                     <button class="navigationButton" (click)="changeDashboardContent(1)">Budgets</button>
                     <button class="navigationButton" (click)="changeDashboardContent(2)">Expenses</button>
                     <button class="navigationButton" (click)="changeDashboardContent(3)">Analytics</button>
+                    <button class="navigationButton" (click)="changeDashboardContent(4)">News</button>
                 </div>
             </div>
             <div class="pages">
@@ -32,6 +33,9 @@
                     </ng-container>
                     <ng-container *ngSwitchCase="3">
                         <app-analytics />
+                    </ng-container>
+                    <ng-container *ngSwitchCase="4">
+                        <app-news />
                     </ng-container>
                     <ng-container *ngSwitchDefault="">
                         <app-budget></app-budget>

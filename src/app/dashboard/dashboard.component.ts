@@ -8,18 +8,19 @@ import { AnalyticsComponent } from '../analytics/analytics.component';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../authentication/auth.service';
+import { NewsComponent } from "../news/news.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, BudgetComponent, ExpenseComponent, AnalyticsComponent, MatIconModule],
+  imports: [CommonModule, FormsModule, RouterModule, BudgetComponent, ExpenseComponent, AnalyticsComponent, MatIconModule, NewsComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit{
 
   content!: string
-  contentId = 1
+  contentId = 4
   constructor(public matDialog: MatDialog) {
   }
   @ViewChild(BudgetComponent) budgetComponent!: BudgetComponent

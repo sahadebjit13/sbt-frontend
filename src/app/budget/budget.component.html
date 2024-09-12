@@ -4,19 +4,25 @@
     <div class="overviewComponentContainer">
         <overview-card [heading]="'Monthly Income'" [data]="20000"/>
         <overview-card [heading]="'Expenditure'" [data]="10000"/>
-        <overview-card [heading]="'Savings'" [data]="combinedData.total_remaining_budget"/>
+        <overview-card [heading]="'Savings'" [data]="totalRemainingBudget"/>
     </div>
     <hr>
     <div class="headingWithButton">
         <h3>Budgets</h3>
-        <span class="material-symbols-outlined" (click)="addItemDialog()">add_circle</span>
+        <div class="iconWrapper">
+            <span class="material-symbols-outlined" matTooltip="Edit existing budget" (click)="updateItemDialog()" >edit</span>
+            <span class="material-symbols-outlined" matTooltip="Delete existing budget" (click)="deleteItemDialog()" >delete</span>
+            <span class="material-symbols-outlined" matTooltip="Create new budget" (click)="addItemDialog()">add_circle</span>
+        </div>
     </div>
     <div class="budgetComponentContainer">
         <budget-card 
-        *ngFor="let budget of combinedData.items"
+        #budgetCard 
+        [id]="budget.category"
+        *ngFor="let budget of combinedDataItems"
         [heading]="budget.category" 
         [amountSpent]="budget.used_budget"
-        [amountAllocated]="budget.amount" 
+        [amountAllocated]="budget.amount.toFixed(2)" 
         [startDate]="budget.startDate"
         [endDate]="budget.endDate"
         [percentageSpent]="budget.percentage_spent"

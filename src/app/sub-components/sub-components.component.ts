@@ -1,6 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
+import { CommonModule } from '@angular/common';
 import { Component, Input, ViewChild } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AgCharts, AgChartsModule } from 'ag-charts-angular';
 
 
@@ -37,16 +39,20 @@ export class OverviewCard {
 @Component({
   selector: 'budget-card',
   standalone: true,
-  imports: [MatProgressBarModule],
+  imports: [MatProgressBarModule, CommonModule, MatTooltipModule],
   template: `
   <ng-container>
     <div class="budgetCard">
       <div class="headingWrapper">
         <h5>{{heading}}</h5>
-        <div class="iconWrapper">
-          <span class="material-symbols-outlined">edit</span>
-          <span class="material-symbols-outlined" (click)="handleDelete()" >delete</span>
-        </div>
+        <span class="material-symbols-outlined"
+        matTooltip="Budget limit has been reached" 
+        [matTooltipPosition]="'left'"
+        *ngIf="limitReached">warning</span>
+        <span class="material-symbols-outlined" 
+        matTooltip="Budget limit has been exceeded" 
+        [matTooltipPosition]="'left'"
+        *ngIf="limitExceeded">error</span>
       </div>
       <hr>
       <div class="info">
@@ -72,9 +78,28 @@ export class BudgetCard {
   @Input() percentageSpent!: number
   // amountSpentRate = Number(this.amountAllocated)/Number(this.amountSpent)*100
   setWidth = 'width: 0'
+  limitReached = false
+  limitExceeded = false
   constructor() {
     setTimeout(() => {
-      this.setWidth = 'width: '+this.percentageSpent+'%'
+      if(this.percentageSpent < 100)
+      {
+        if(this.percentageSpent <= 40)
+        {
+          this.setWidth = 'width: '+this.percentageSpent+'%'
+        } else if(this.percentageSpent <=80 && this.percentageSpent >40) {
+          this.setWidth = 'width: '+this.percentageSpent+'%; background-color: gold;'
+        } else if(this.percentageSpent <=90 && this.percentageSpent >80) {
+            this.setWidth = 'width: '+this.percentageSpent+'%; background-color: var(--dark-orange);'
+        } else { 
+          this.setWidth = 'width: '+this.percentageSpent+'%; background-color: var(--light-warn);'
+        }
+      } else {
+        this.setWidth = 'width: 100%; background-color: var(--light-warn)'
+        if(this.percentageSpent == 100)
+        this.limitReached = true
+        else this.limitExceeded = true
+      }
     }, 750);
   }
   

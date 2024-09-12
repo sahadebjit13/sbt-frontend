@@ -1,0 +1,17 @@
+<body>
+    <div class="newsContainer">
+        <h3>News articles</h3>
+        <div *ngFor="let i of t" class="grid-container">
+            <div class="card">
+                <img [src]="i['urlToImage']" alt="Article Image">
+                <div class="card-content">
+                    <h2>{{i["title"]}}</h2>
+                    <!-- <p>by Alex Harring, Fred Imbert</p> -->
+                    <p>{{i["description"]}}</p>
+                    <p></p>
+                    <a target="_blank" [href]="i['url']" class="read-more">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

@@ -41,6 +41,21 @@ hr{
 .headingWithButton>span{
     font-size: 30px;
 }
+.iconWrapper{
+    display: flex;
+    gap: 10px;
+}
+.iconWrapper>span{
+    padding: 5px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    font-size: 30px;
+}
+.iconWrapper>span:hover{
+    cursor: pointer;
+    box-shadow: 0 4px 16px 0 rgba( 31, 38, 135, 0.12 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
 .material-symbols-outlined:hover{
     cursor: pointer;
 }
@@ -84,6 +99,14 @@ form{
 #modal-add-item-button {
     margin-right: 30px;
     background-color: var(--light-green);
+}
+#modal-update-item-button {
+    margin-right: 30px;
+    background-color: var(--dark-orange);
+}
+#modal-delete-item-button {
+    margin-right: 30px;
+    background-color: var(--light-warn);
 }
 #modal-cancel-button {
     background-color: var(--faded-green);

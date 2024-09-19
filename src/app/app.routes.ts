@@ -10,5 +10,5 @@ export const routes: Routes = [
     {component: RegistrationComponent, path: 'registration'},
     {component: PasswordChangeComponent, path: 'password-change'},
     {component: DashboardComponent, path: 'dashboard', canActivate: [AuthGuard]},
-    {redirectTo: '/dashboard', path: '', pathMatch:'full'}
+    {redirectTo: '/login', path: '', pathMatch:'full'}
 ];

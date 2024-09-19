@@ -67,4 +67,10 @@ export class BudgetService {
     const headers = this.getHeaders()
     return this.http.delete(this.url+`/${id}`, { headers })
   }
+
+  getTotalBudgetByEmail(): Observable<Object>{
+    const headers = this.getHeaders()
+    const email = this.getEmail()
+    return this.http.get(this.url+`/emailtotal/${email}`, { headers })
+  }
 }

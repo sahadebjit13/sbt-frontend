@@ -15,7 +15,6 @@ import { BudgetService } from '../service/budget.service';
 
 
 export interface Transactions {
-  expenseId: number;
   category: string;
   amount: number;
   date: Date;
@@ -43,7 +42,11 @@ interface AccumulatedExpense {
 })
 export class ExpenseComponent implements OnInit, AfterViewInit{
   @Input() expenseOptions: AgChartsModule = {}
-  @Input() budgetOptions: AgChartsModule;
+  @Input() budgetOptions: AgChartsModule = {}
+
+  totalBudget!: number
+  remainingBudget!: number
+  usedBudget!: number
 
 
   ngOnInit(): void {
@@ -56,12 +59,13 @@ export class ExpenseComponent implements OnInit, AfterViewInit{
 
   expenseDataResponse!: Expense[]
   expenseDataChart!: any
+  budgetDataChart!: any
 
   // TABLE------------------------
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['expenseId', 'category', 'amount', 'date'];
+  displayedColumns: string[] = [ 'category', 'amount', 'date'];
   dataSource = new MatTableDataSource<Expense>();
 
   getExpenseChartDetails(expenses: Expense[]){
@@ -82,7 +86,7 @@ export class ExpenseComponent implements OnInit, AfterViewInit{
 
 
   // -----------------------------
-  constructor(private expenseService: ExpenseService, public matDialog: MatDialog) {
+  constructor(private expenseService: ExpenseService, private budgetService: BudgetService, public matDialog: MatDialog) {
     
     expenseService.getExpenseByEmail().subscribe(
       (data) => {
@@ -123,45 +127,65 @@ export class ExpenseComponent implements OnInit, AfterViewInit{
       (error) => {console.log(error);
       }
     )
+
+    budgetService.getTotalBudgetByEmail().subscribe(
+      (data) => {
+        this.totalBudget = Number(data.toString())
+        expenseService.getBudgetSummary().subscribe(
+          (data) => {
+            this.budgetDataChart = data
+            this.remainingBudget = Number(this.budgetDataChart.total_remaining_budget)
+            
+            this.budgetOptions = {
+              theme: "ag-polychroma",
+              data: [
+                { type: "Total Budget", amount: this.totalBudget },
+                { type: "Remaining Budget", amount: this.remainingBudget },
+                { type: "Used Budget", amount: this.totalBudget - this.remainingBudget },
+              ],
+              title: {
+                text: "Budget",
+                fontFamily: 'Montserrat'
+              },
+              series: [
+                {
+                  type: "donut",
+                  calloutLabelKey: "type",
+                  angleKey: "amount",
+                  innerRadiusRatio: 0.7,
+                },
+              ],
+              tooltip: {
+                class: "chart"
+              },
+              legend: {
+                position: 'top', // 'top', 'right', 'left',
+                item: {
+                  label: {
+                    fontSize: 16,
+                    fontFamily: 'Montserrat'
+                  }
+                }
+              },
+              background: {
+                visible: false,
+              }
+            };
+          }
+        )
+        
+        
+      }
+    )
+    setTimeout(() => {
+      
+    }, 1000);
+    console.log(this.totalBudget);
     
     console.log(this.expenseDataResponse);
 
 
-    this.budgetOptions = {
-      theme: "ag-polychroma",
-      data: [
-        { type: "Income", amount: 60000 },
-        { type: "Expense", amount: 40000 },
-        { type: "Saving", amount: 20000 },
-      ],
-      title: {
-        text: "Budget",
-        fontFamily: 'Montserrat'
-      },
-      series: [
-        {
-          type: "donut",
-          calloutLabelKey: "type",
-          angleKey: "amount",
-          innerRadiusRatio: 0.7,
-        },
-      ],
-      tooltip: {
-        class: "chart"
-      },
-      legend: {
-        position: 'top', // 'top', 'right', 'left',
-        item: {
-          label: {
-            fontSize: 16,
-            fontFamily: 'Montserrat'
-          }
-        }
-      },
-      background: {
-        visible: false,
-      }
-    };
+    
   }
 
 
@@ -188,7 +212,7 @@ export class ExpenseComponent implements OnInit, AfterViewInit{
   template: `
   <div id="modal-content-wrapper">
     <div id="modal-header">
-      <h1 id="modal-title">Create a new budget</h1>
+      <h1 id="modal-title">Add a new expense</h1>
     </div>
     <div>
     <form>
@@ -209,7 +233,7 @@ export class ExpenseComponent implements OnInit, AfterViewInit{
 
       <!-- Start Date Field -->
       <div class="form-outline mb-4 inputFields">
-        <label for="startDate">Select start date:</label>
+        <label for="startDate">Select expense date:</label>
         <input type="date" id="startDate" class="form-control form-control-lg" name="startDate" [(ngModel)]="newExpense.date" />
       </div>
 

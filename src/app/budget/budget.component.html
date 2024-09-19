@@ -2,9 +2,9 @@
 <body @fade>
     <h3>Overview</h3>
     <div class="overviewComponentContainer">
-        <overview-card [heading]="'Monthly Income'" [data]="20000"/>
-        <overview-card [heading]="'Expenditure'" [data]="10000"/>
-        <overview-card [heading]="'Savings'" [data]="totalRemainingBudget"/>
+        <overview-card [heading]="'Total Budget'" [data]="totalBudget"/>
+        <overview-card [heading]="'Remaining Budget'" [data]="totalRemainingBudget"/>
+        <overview-card [heading]="'Used Budget'" [data]="(totalBudget-totalRemainingBudget)"/>
     </div>
     <hr>
     <div class="headingWithButton">

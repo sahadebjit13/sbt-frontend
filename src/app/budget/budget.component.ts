@@ -36,6 +36,7 @@ export class BudgetComponent implements OnInit {
   combinedData!: any
   totalRemainingBudget!: any
   combinedDataItems!: any
+  totalBudget!: any
 
 
   constructor(private budgetService: BudgetService, public matDialog: MatDialog, private dashboardComponent: DashboardComponent, private expenseService: ExpenseService) {
@@ -58,7 +59,7 @@ export class BudgetComponent implements OnInit {
             };
             console.log(this.combinedData);
             this.combinedDataItems = this.combinedData.items
-            this.totalRemainingBudget = Number(this.combinedData.total_remaining_budget).toFixed(2)
+            this.totalRemainingBudget = Number(this.combinedData.total_remaining_budget).toFixed(0)
             
           },
           (error) => {console.log(error);
@@ -67,6 +68,16 @@ export class BudgetComponent implements OnInit {
       },
       (error) => {console.log(error);
       })
+
+    budgetService.getTotalBudgetByEmail().subscribe(
+      (data) => {
+        console.log(data);
+        
+        this.totalBudget = data
+      },
+      (error) => console.log(error)
+      
+    )
     
     
   }

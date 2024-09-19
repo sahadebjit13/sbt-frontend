@@ -17,12 +17,6 @@
         <div class="tableContainer">
             <table mat-table [dataSource]="expenseDataResponse">
           
-              <!-- Position Column -->
-              <ng-container matColumnDef="expenseId">
-                <th mat-header-cell *matHeaderCellDef> Transaction ID </th>
-                <td mat-cell *matCellDef="let expense"> {{expense.expenseId}} </td>
-              </ng-container>
-          
               <!-- Name Column -->
               <ng-container matColumnDef="category">
                 <th mat-header-cell *matHeaderCellDef> Category </th>

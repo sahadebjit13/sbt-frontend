@@ -30,7 +30,7 @@ interface MonthlyExpense {
 export class AnalyticsComponent {
   @Input() historyOptions = {}
   
-  displayedColumns: string[] = ['no', 'month', 'income', 'expense', 'saving', 'rating'];
+  displayedColumns: string[] = [ 'month', 'income', 'expense', 'saving', 'rating'];
   dataSource = new MatTableDataSource<MonthlyExpense>();
   monthlyExpenseList!: any
 

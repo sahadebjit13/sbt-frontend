@@ -13,11 +13,6 @@
         <div class="tableContainer">
             <table mat-table [dataSource]="monthlyExpenseList">
           
-              <!-- Position Column -->
-              <ng-container matColumnDef="no">
-                <th mat-header-cell *matHeaderCellDef> Serial no. </th>
-                <td mat-cell *matCellDef="let history"> {{history.id}} </td>
-              </ng-container>
           
               <!-- Name Column -->
               <ng-container matColumnDef="month">

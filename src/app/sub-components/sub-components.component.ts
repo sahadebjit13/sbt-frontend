@@ -53,6 +53,10 @@ export class OverviewCard {
         matTooltip="Budget limit has been exceeded" 
         [matTooltipPosition]="'left'"
         *ngIf="limitExceeded">error</span>
+        <span class="material-symbols-outlined" 
+        matTooltip="Expenditure is within limit" 
+        [matTooltipPosition]="'left'"
+        *ngIf="withinLimit">check_circle</span>
       </div>
       <hr>
       <div class="info">
@@ -78,12 +82,14 @@ export class BudgetCard {
   @Input() percentageSpent!: number
   // amountSpentRate = Number(this.amountAllocated)/Number(this.amountSpent)*100
   setWidth = 'width: 0'
+  withinLimit = false
   limitReached = false
   limitExceeded = false
   constructor() {
     setTimeout(() => {
       if(this.percentageSpent < 100)
       {
+        this.withinLimit = true
         if(this.percentageSpent <= 40)
         {
           this.setWidth = 'width: '+this.percentageSpent+'%'

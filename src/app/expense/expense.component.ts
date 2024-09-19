@@ -5,6 +5,13 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { ExpenseService } from '../service/expense.service';
 import { Expense } from '../entity/expense';
+import { CommonModule, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AuthService } from '../authentication/auth.service';
+import { Budget } from '../entity/budget';
+import { BudgetService } from '../service/budget.service';
 
 
 export interface Transactions {
@@ -75,7 +82,7 @@ export class ExpenseComponent implements OnInit, AfterViewInit{
 
 
   // -----------------------------
-  constructor(private expenseService: ExpenseService) {
+  constructor(private expenseService: ExpenseService, public matDialog: MatDialog) {
     
     expenseService.getExpenseByEmail().subscribe(
       (data) => {
@@ -157,5 +164,110 @@ export class ExpenseComponent implements OnInit, AfterViewInit{
     };
   }
 
+
+  addItemDialog() {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    //dialogConfig.disableClose = true;
+    dialogConfig.id = "add-item-component"
+    dialogConfig.height = "360px"
+    dialogConfig.width = "800px"
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(AddItemComponent, dialogConfig);
+  }
+
   
 }
+
+/* ======================================================================================================================================================= */
+
+@Component({
+  selector: 'budget-add-item',
+  standalone: true,
+  imports: [CommonModule, FormsModule, NgFor],
+  template: `
+  <div id="modal-content-wrapper">
+    <div id="modal-header">
+      <h1 id="modal-title">Create a new budget</h1>
+    </div>
+    <div>
+    <form>
+      <!-- Amount Field -->
+      <div class="form-outline mb-4 inputFields">
+        <label for="amount">Amount spent:</label>
+        <input type="number" id="amount" class="form-control form-control-lg" placeholder="Amount" name="amount" [(ngModel)]="newExpense.amount" />
+      </div>
+
+      <!-- Category Field -->
+      <div class="form-outline mb-4 inputFields">
+        <label for="category">Choose a category:</label>
+        <select id="category" class="form-control form-control-lg" name="category" [(ngModel)]="newExpense.category" >
+          <option value="" >Select category</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+
+      <!-- Start Date Field -->
+      <div class="form-outline mb-4 inputFields">
+        <label for="startDate">Select start date:</label>
+        <input type="date" id="startDate" class="form-control form-control-lg" name="startDate" [(ngModel)]="newExpense.date" />
+      </div>
+
+      <!-- Submit Button -->
+      <div id="modal-footer">
+        <button mat-raised-button id="modal-add-item-button" (click)="addFunction()">Add Item</button>
+        <button mat-raised-button id="modal-cancel-button" (click)="closeAddItem()">Cancel</button>
+      </div>
+    </form>
+
+
+    </div>
+    
+  </div>`,
+  styleUrl: './expense.component.css'
+})
+export class AddItemComponent implements OnInit{
+
+  constructor(public dialogRef: MatDialogRef<AddItemComponent>, private authService: AuthService, private router: Router, private budgetService: BudgetService, private expenseService: ExpenseService) { }
+
+  categories: string[] = ['Rent','Utilities','Food','Transportation','Healthcare','Entertainment','Personal Care','Education'];
+  
+  newExpense: Expense = { expenseId: null, amount: 0, category: '', date: '', email: JSON.stringify(localStorage.getItem('email')).replaceAll(/["']+/g, '') }
+
+  ngOnInit() {  }
+  
+  addFunction() {
+    // console.log('create start',this.newBudget.endDate.length);
+    
+    if(this.newExpense.amount > 0 && this.newExpense.date.length != 0)
+    {
+      console.log('inside create');
+      
+      this.expenseService.createExpense(this.newExpense).subscribe(
+        (data) => {
+          console.log('Item added', data);
+          
+        },
+        (error) => {console.log(error);
+        }
+      )
+    }
+    else {
+      alert('Please fill in all fields')
+    }
+
+    console.log('create end');
+    
+
+    this.closeAddItem();
+  }
+
+  // If the user clicks the cancel button a.k.a. the go back button, then\
+  // just close the modal
+  closeAddItem() {
+    this.dialogRef.close();
+  }
+}
+
+/* ======================================================================================================================================================= */
+

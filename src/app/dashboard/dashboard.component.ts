@@ -20,7 +20,7 @@ import { NewsComponent } from "../news/news.component";
 export class DashboardComponent implements OnInit{
 
   content!: string
-  contentId = 4
+  contentId = 2
   constructor(public matDialog: MatDialog) {
   }
   @ViewChild(BudgetComponent) budgetComponent!: BudgetComponent

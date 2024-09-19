@@ -64,3 +64,55 @@ mat-row{
 mat-paginator{
     background-color: transparent;
 }
+
+/* This styles the logout dialog box */
+#modal-content-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+}
+#modal-title {
+    font-size: 20px;
+}
+#modal-footer {
+    justify-self: right;
+    align-self: end;
+}
+#modal-footer>button{
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+}
+form{
+    width: 100%;
+}
+#modal-add-item-button {
+    margin-right: 30px;
+    background-color: var(--light-green);
+}
+#modal-update-item-button {
+    margin-right: 30px;
+    background-color: var(--dark-orange);
+}
+#modal-delete-item-button {
+    margin-right: 30px;
+    background-color: var(--light-warn);
+}
+#modal-cancel-button {
+    background-color: var(--faded-green);
+}
+.inputFields>input,select,option{
+    border-radius: 25px;
+    padding: 0 10px;
+}
+.inputFields{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
